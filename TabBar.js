@@ -17,22 +17,23 @@ const styles = StyleSheet.create({
   tab: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginLeft: 20,    
-    paddingBottom: 10
+    alignItems: "center",
+    marginLeft: 20,
+    marginRight: 20,    
   },
   scrollContainer: {
     paddingRight: 20
   },
   tabs: {
-    marginTop: 15,
+    height: 43,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    justifyContent: 'center',
+    alignItems: 'stretch',
     borderWidth: 1,
     borderTopWidth: 0,
     borderLeftWidth: 0,
     borderRightWidth: 0,
-    borderBottomColor: '#d2d2d2'
+    borderBottomColor: '#E5E5E5'
   },
 
   badgeBubble: {
@@ -157,9 +158,27 @@ class TabBar extends Component {
       }
     }
 
-    var left = this.props.scrollValue.interpolate({
-      inputRange: inputRange, outputRange: outputRangeLeft
-    });
+    var left = { transform: [
+        {
+          translateX: this.props.scrollValue.interpolate({
+            inputRange: inputRange, outputRange: outputRangeLeft
+          })
+        }
+    ]}
+
+    // var width = { transform: [
+    //   {
+    //     scale: this.props.scrollValue.interpolate({
+    //       inputRange: inputRange, outputRange: outputRangeWidth
+    //     })
+    //   }
+    // ]}
+
+
+    
+    // var left = this.props.scrollValue.interpolate({
+    //   inputRange: inputRange, outputRange: outputRangeLeft
+    // });
 
     var width = this.props.scrollValue.interpolate({
       inputRange: inputRange, outputRange: outputRangeWidth
@@ -172,7 +191,7 @@ class TabBar extends Component {
       bottom: 0
     };
 
-    return <Animated.View style={[tabUnderlineStyle, {left}, {width}]}/>
+    return <Animated.View style={[tabUnderlineStyle, {width: 100}]}/>
   }
 
   render() {
