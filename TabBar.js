@@ -156,7 +156,6 @@ class TabBar extends Component {
         outputRangeWidth.push(this.tabState[k].width);
       }
     }
-
     
     var animatedValue = new Animated.ValueXY({x: this.props.activeTab, y: 0});
 
@@ -167,8 +166,6 @@ class TabBar extends Component {
     var left = animatedValue.x.interpolate({
       inputRange: inputRange, outputRange: outputRangeLeft
     });
-
-    console.log("LEFT: ", left);
 
     var tabUnderlineStyle = {
       position: 'absolute',
