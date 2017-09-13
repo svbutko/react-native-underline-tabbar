@@ -191,7 +191,7 @@ class TabBar extends Component {
     return (
         <Animated.View style={this.props.tab ? this.props.tabBarStyle : [styles.tabs, {backgroundColor : this.props.backgroundColor}, this.props.style, this.props.tabBarStyle]}>
           <ScrollView horizontal={true}
-                      contentContainerStyle={[styles.scrollContainer, this.props.scrollContainerStyle]}
+                      contentContainerStyle={this.props.tab ? {} : [styles.scrollContainer, this.props.scrollContainerStyle]}
                       showsHorizontalScrollIndicator={false}
                       ref={(node) => this.scrollTabs = node}
                       bounces={false}
