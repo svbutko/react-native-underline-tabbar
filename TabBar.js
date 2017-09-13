@@ -64,7 +64,8 @@ class TabBar extends Component {
     activeTextColor: PropTypes.string,
     inactiveTextColor: PropTypes.string,
     scrollContainerStyle: PropTypes.object,
-    tabStyles: PropTypes.object
+    tabStyles: PropTypes.object,
+    tab: PropTypes.element,
   };
 
 
@@ -123,26 +124,34 @@ class TabBar extends Component {
   }
 
   renderTab = (tab, page) => {
-    const {activeTab, tabBadgeColor} = this.props;
-    const {label, badge, badgeColor} = tab;
-    const isTabActive = activeTab === page;
-    const activeTextColor = this.props.activeTextColor || "navy";
-    const inactiveTextColor = this.props.inactiveTextColor || "black";
-    const textStyle = this.props.tabBarTextStyle || {};
-    return (
-        <TouchableOpacity style={[styles.tab, this.props.tabStyles.tab]}
-                          key={page}
-                          onPress={() => this.props.goToPage(page)}
-                          onLayout={(event) => this.onTabLayout(event, page)}>
-           <Text style={[{color: isTabActive ? activeTextColor : inactiveTextColor, fontWeight: isTabActive ? '400' : '400'}, textStyle]}>{label}</Text>
-            {badge != null && badge > 0 &&
-            <View style={[styles.badgeBubble,
-                          this.props.tabStyles.badgeBubble,
-                          {backgroundColor: badgeColor || activeTextColor}]}>
-              <Text style={[styles.badgeText, this.props.tabStyles.badgeText]}>{badge || 0}</Text>
-            </View>}
+    if (this.props.tab) {
+      return (
+        <TouchableOpacity key={page} onPress={() => this.props.goToPage(page)} onLayout={(event) => this.onTabLayout(event, page)}>
+          {this.props.tab}
         </TouchableOpacity>
-    );
+      );    
+    } else {
+      const {activeTab, tabBadgeColor} = this.props;
+      const {label, badge, badgeColor} = tab;
+      const isTabActive = activeTab === page;
+      const activeTextColor = this.props.activeTextColor || "navy";
+      const inactiveTextColor = this.props.inactiveTextColor || "black";
+      const textStyle = this.props.tabBarTextStyle || {};
+      return (
+          <TouchableOpacity style={[styles.tab, this.props.tabStyles.tab]}
+                            key={page}
+                            onPress={() => this.props.goToPage(page)}
+                            onLayout={(event) => this.onTabLayout(event, page)}>
+             <Text style={[{color: isTabActive ? activeTextColor : inactiveTextColor, fontWeight: isTabActive ? '400' : '400'}, textStyle]}>{label}</Text>
+              {badge != null && badge > 0 &&
+              <View style={[styles.badgeBubble,
+                            this.props.tabStyles.badgeBubble,
+                            {backgroundColor: badgeColor || activeTextColor}]}>
+                <Text style={[styles.badgeText, this.props.tabStyles.badgeText]}>{badge || 0}</Text>
+              </View>}
+          </TouchableOpacity>
+      );
+    }
   }
 
   renderUnderline() {
@@ -156,6 +165,7 @@ class TabBar extends Component {
         outputRangeWidth.push(this.tabState[k].width);
       }
     }
+
     
     var animatedValue = new Animated.ValueXY({x: this.props.activeTab, y: 0});
 
@@ -179,7 +189,7 @@ class TabBar extends Component {
 
   render() {
     return (
-        <Animated.View style={[styles.tabs, {backgroundColor : this.props.backgroundColor}, this.props.style, this.props.tabBarStyle]}>
+        <Animated.View style={this.props.tab ? this.props.tabBarStyle : [styles.tabs, {backgroundColor : this.props.backgroundColor}, this.props.style, this.props.tabBarStyle]}>
           <ScrollView horizontal={true}
                       contentContainerStyle={[styles.scrollContainer, this.props.scrollContainerStyle]}
                       showsHorizontalScrollIndicator={false}
