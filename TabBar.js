@@ -18,8 +18,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: "center",
-    marginLeft: 20,
-    marginRight: 20,    
+    paddingHorizontal: 20,  
   },
   scrollContainer: {
     paddingRight: 20
@@ -158,31 +157,18 @@ class TabBar extends Component {
       }
     }
 
-    var left = { transform: [
-        {
-          translateX: this.props.scrollValue.interpolate({
-            inputRange: inputRange, outputRange: outputRangeLeft
-          })
-        }
-    ]}
-
-    // var width = { transform: [
-    //   {
-    //     scale: this.props.scrollValue.interpolate({
-    //       inputRange: inputRange, outputRange: outputRangeWidth
-    //     })
-    //   }
-    // ]}
-
-
     
-    // var left = this.props.scrollValue.interpolate({
-    //   inputRange: inputRange, outputRange: outputRangeLeft
-    // });
+    var animatedValue = new Animated.ValueXY({x: this.props.activeTab, y: 0});
 
-    var width = this.props.scrollValue.interpolate({
+    var width = animatedValue.x.interpolate({
       inputRange: inputRange, outputRange: outputRangeWidth
     });
+
+    var left = animatedValue.x.interpolate({
+      inputRange: inputRange, outputRange: outputRangeLeft
+    });
+
+    console.log("LEFT: ", left);
 
     var tabUnderlineStyle = {
       position: 'absolute',
@@ -191,7 +177,7 @@ class TabBar extends Component {
       bottom: 0
     };
 
-    return <Animated.View style={[tabUnderlineStyle, {width: 100}]}/>
+    return <Animated.View style={[tabUnderlineStyle, {left: left}, {width: width}]}/>
   }
 
   render() {
