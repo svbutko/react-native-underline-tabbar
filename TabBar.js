@@ -127,7 +127,7 @@ class TabBar extends Component {
     if (this.props.tab) {
       return (
         <TouchableOpacity key={page} onPress={() => this.props.goToPage(page)} onLayout={(event) => this.onTabLayout(event, page)}>
-          {this.props.tab}
+          {React.cloneElement(this.props.tab, {tab})}
         </TouchableOpacity>
       );    
     } else {
@@ -188,6 +188,8 @@ class TabBar extends Component {
   }
 
   render() {
+    console.log("SMTHING");
+
     return (
         <Animated.View style={this.props.tab ? this.props.tabBarStyle : [styles.tabs, {backgroundColor : this.props.backgroundColor}, this.props.style, this.props.tabBarStyle]}>
           <ScrollView horizontal={true}
