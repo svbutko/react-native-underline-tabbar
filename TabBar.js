@@ -188,8 +188,6 @@ class TabBar extends Component {
   }
 
   render() {
-    console.log("SMTHING");
-
     return (
         <Animated.View style={this.props.tab ? this.props.tabBarStyle : [styles.tabs, {backgroundColor : this.props.backgroundColor}, this.props.style, this.props.tabBarStyle]}>
           <ScrollView horizontal={true}
