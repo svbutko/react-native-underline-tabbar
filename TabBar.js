@@ -184,7 +184,7 @@ class TabBar extends Component {
       bottom: 0
     };
 
-    return <Animated.View style={this.props.underlineStyle ? [this.props.underlineStyle, {position: 'absolute', bottom: 0}] : [tabUnderlineStyle, {left: left}, {width: width}]}/>
+    return <Animated.View style={this.props.underlineStyle ? [this.props.underlineStyle, {position: 'absolute', bottom: 0, left: left}] : [tabUnderlineStyle, {left: left}, {width: width}]}/>
   }
 
   render() {
