@@ -66,6 +66,7 @@ class TabBar extends Component {
     scrollContainerStyle: PropTypes.object,
     tabStyles: PropTypes.object,
     tab: PropTypes.element,
+    unerlineStyle: PropTypes.object,
   };
 
 
@@ -155,8 +156,7 @@ class TabBar extends Component {
   }
 
   renderUnderline() {
-    var inputRange = Object.keys(this.tabState);
-    var outputRangeLeft = [];
+    var inputRange = Object.keys(this.tabState);    var outputRangeLeft = [];
     var outputRangeWidth = [];
 
     for (var k in this.tabState) {
@@ -184,7 +184,7 @@ class TabBar extends Component {
       bottom: 0
     };
 
-    return <Animated.View style={[tabUnderlineStyle, {left: left}, {width: width}]}/>
+    return <Animated.View style={this.props.underlineStyle ? [this.props.underlineStyle, {position: 'absolute', bottom: 0}] : [tabUnderlineStyle, {left: left}, {width: width}]}/>
   }
 
   render() {
