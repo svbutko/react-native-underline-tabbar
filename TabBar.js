@@ -66,7 +66,7 @@ class TabBar extends Component {
     scrollContainerStyle: PropTypes.object,
     tabStyles: PropTypes.object,
     tab: PropTypes.element,
-    unerlineStyle: PropTypes.object,
+    underlineStyle: PropTypes.object,
   };
 
 
