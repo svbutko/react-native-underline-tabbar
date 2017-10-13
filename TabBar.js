@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
     StyleSheet,
     Text,
@@ -10,6 +10,7 @@ import {
     ScrollView,
     Dimensions
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
